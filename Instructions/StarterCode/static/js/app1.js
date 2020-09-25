@@ -44,6 +44,7 @@ console.log(yticks);
 //  pie chart labels
 
 //  -----------------part 3 Demographic info for this code data is displaying as array----------------------------------------------
+// ---------------------------------Barchart-----------------------------------------------------------
 var trace1 = {
   type: "bar",
     
@@ -66,48 +67,37 @@ var trace1 = {
  Plotly.newPlot("bar",data,layout); 
 
 // -------------------------------------------------------------
+var trace2 = {
+  x: otu_ids,
+  y:sample_values,
+  mode: 'markers',
+  text: otu_labels,
+    marker: {
+    color:otu_ids,
+    colorscale:"Earth",
+    opacity: [1,0.8, 0.6, 0.4, 0.2],
+ size:sample_values
+  }
+};
+
+var data = [trace2];
+
+var layout = {
+  title: "Bacteria Cultures Per Sample",
+      // margin: { t: 0 },
+      hovermode: "closest",
+      xaxis: { title: "OTU ID" },
+      margin: { t: 30}
+        //  margin: { t: 30} if this is in the chart is showing the tiltle
+    };
+
+
+Plotly.newPlot('bubble', data, layout)
 
 
 
-// ----------------------------------------------------------------
 
-// ----------------------------------------------------------------
-
-//  d3.select("#sample-metadata")
-//  .selectAll("div")
-//  .data(meta_Data)
-//  .enter()
-//  .append("div")
-//  .text(function(d){
-//    console.log(d);
-//    return d;
-  // console.log(d);
-  //  return`${key}: ${value}`;
-  //  return '{d[0]}:${d[1]}';
  
-//  });
-
- 
-//  .property("value",d);
-// return `<td>${d.date}</td><td>${d.low}</td><td>${d.high}</td>`;
-// -----------------------------------------------Demographic info test-----------------------------------------------
-// var mData = data.metadata;
-// console.log(mData);
-//  var metaEle =Object.entries(metaData).forEach(([key, value]) => {
-//   // //   // Log the key and value
-//     console.log(` ${key} :${value}`);
-  
-//   });
-
-//  d3.select("#sample-metadata")
-//  .selectAll("div")
-//  .data(metaEle)
-//  .enter()
-//  .append("div")
-//  .text(function(d){
-//    return d;
-//    console.log("------------------------");
-//  });
 
 
  
