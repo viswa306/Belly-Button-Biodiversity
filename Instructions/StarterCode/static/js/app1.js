@@ -44,7 +44,26 @@ console.log(yticks);
 //  pie chart labels
 
 //  -----------------part 3 Demographic info for this code data is displaying as array----------------------------------------------
-
+var trace1 = {
+  type: "bar",
+    
+    x:sample_values ,
+      y:yticks,
+    text:otu_labels,
+     orientation: "h"
+ }
+ var data = [trace1];
+ var layout = {
+   title: "'Bar' Chart",
+   margin: {
+     l: 100,
+     r: 100,
+     t: 100,
+     b: 100
+   }
+ };
+ 
+ Plotly.newPlot("bar",data,layout); 
 
 // -------------------------------------------------------------
 
