@@ -42,7 +42,21 @@ console.log(yticks);
 var labels = otu_ids.slice(0, 10).map(otuID => ` ${otuID}`).reverse()
 
 
-//  -----------------part 3 Demographic info for this code data is displaying as array----------------------------------------------
+//  -----------------part 3 Demographic info ----------------------------------------------
+var metaData =data.metadata[0];
+  // var metaData= data.metadata[0];
+  console.log(metaData);
+
+  Object.entries(metaData).forEach(([key, value]) => {
+    d3.select("#sample-metadata")
+      .append("h6")
+      .text(`${key}: ${value}`);
+
+  
+  });
+
+
+
 // ---------------------------------Barchart-----------------------------------------------------------
 var trace1 = {
   type: "bar",
