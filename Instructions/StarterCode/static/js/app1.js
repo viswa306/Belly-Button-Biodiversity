@@ -55,20 +55,18 @@ var metaData =data.metadata[0];
   
   });
 
-
-
 // ---------------------------------Barchart-----------------------------------------------------------
 var trace1 = {
   type: "bar",
-    
-    x:sample_values ,
+     x:sample_values ,
       y:yticks,
     text:otu_labels,
      orientation: "h"
  }
  var data = [trace1];
+//   lay out
  var layout = {
-   title: "'Bar' Chart",
+   title: "Bar Chart",
    margin: {
      l: 100,
      r: 100,
@@ -115,11 +113,7 @@ var layout = {
         //  margin: { t: 30} if this is in the chart is showing the tiltle
     };
 
-
 Plotly.newPlot('bubble', data, layout)
-
-
-// -------------------------------------------------------------
 
 // ---------------------------------------pie chart--------------------------------------------------------------
 var trace3 = {
@@ -138,24 +132,6 @@ var data =[trace3]
 
 // -------------------------------Demographic info-----------------------------------------------
 
-
-//  d3.select("#sample-metadata")
-//   .selectAll("div")
-//   .data(meta_Data)
-//   .enter()
-//   .append("div")
-//   .html(meta_Data.join('<br/>'));
-  
-// ----------------------code displayed as array----------------------------------
-// d3.select("#sample-metadata")
-// .selectAll("div")
-// .data(meta_Data)
-// .enter()
-// .append("div")
-// .text(function(d){
-//   return d;
-  
-// });
 // --------------------------------------------------------------------------------------
 // d3.select("#sample-metadata")
 // .selectAll("div")
