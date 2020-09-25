@@ -38,10 +38,9 @@ console.log(otu_ids);
 var yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse()
 console.log(yticks);
 
-
-
-
 //  pie chart labels
+var labels = otu_ids.slice(0, 10).map(otuID => ` ${otuID}`).reverse()
+
 
 //  -----------------part 3 Demographic info for this code data is displaying as array----------------------------------------------
 // ---------------------------------Barchart-----------------------------------------------------------
@@ -66,7 +65,18 @@ var trace1 = {
  
  Plotly.newPlot("bar",data,layout); 
 
-// -------------------------------------------------------------
+// ---------------------------- Bubble chart--------------------------------------------
+
+// * Use `otu_ids` for the x values.
+
+// * Use `sample_values` for the y values.
+
+// * Use `sample_values` for the marker size.
+
+// * Use `otu_ids` for the marker colors.
+
+// * Use `otu_labels` for the text values.
+
 var trace2 = {
   x: otu_ids,
   y:sample_values,
@@ -95,32 +105,21 @@ var layout = {
 Plotly.newPlot('bubble', data, layout)
 
 
-
-
- 
-
-
- 
-// ---------------------------------Barchart-----------------------------------------------------------
-
-
-
- 
-// ---------------------------- Bubble chart--------------------------------------------
-
-// * Use `otu_ids` for the x values.
-
-// * Use `sample_values` for the y values.
-
-// * Use `sample_values` for the marker size.
-
-// * Use `otu_ids` for the marker colors.
-
-// * Use `otu_labels` for the text values.
-
+// -------------------------------------------------------------
 
 // ---------------------------------------pie chart--------------------------------------------------------------
+var trace3 = {
+  labels: labels,
+    values:otu_ids,
+  type: "pie"
+};
+var data =[trace3]
+ var layout ={
 
+  title:"pie chart"
+ }
+ Plotly.newPlot("pie",data,layout);
+  
 
 
 // -------------------------------Demographic info-----------------------------------------------
