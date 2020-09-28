@@ -6,7 +6,7 @@
 
 // created build plot function and wrote the logic
 function buildplot(sample){
-    d3.json("static/samples.json").then((importedData)=>{
+    d3.json("js/samples.json").then((importedData)=>{
     // d3.json("static/samples.json").then(function(data) {
     
         console.log(importedData);
@@ -139,7 +139,7 @@ function buildplot(sample){
     
       buildplot(940);
      var testId = d3.select("#selDataset");
-     d3.json("static/samples.json").then((importedData)=>{
+     d3.json("js/samples.json").then((importedData)=>{
       console.log(importedData);
     var data = importedData;
     var names = data.names;
