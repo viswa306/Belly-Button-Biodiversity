@@ -127,22 +127,6 @@ var data =[trace3]
   title:"pie chart"
  }
  Plotly.newPlot("pie",data,layout);
-  
-
-
-// -------------------------------Demographic info-----------------------------------------------
-
-// --------------------------------------------------------------------------------------
-// d3.select("#sample-metadata")
-// .selectAll("div")
-// .data(demoInfo1)
-// .enter()
-// .append("div")
-// .text(function(d){
-//   return d;
-  
-// });
-
-
+ 
 });
 

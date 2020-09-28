@@ -1,117 +1,180 @@
+// / new file for the homework with out event handler the graph are working:
+// Use the D3 library to read in `samples
 // Use D3 fetch to read the JSON file
 // The data from the JSON file is arbitrarily named importedData as the argument
 
 
-function unpack(rows, index) {
-    return rows.map(function(row) {
-      return row[index];
+// function unpack(rows, index) {
+//     return rows.map(function(row) {
+//       return row[index];
+//     });
+//   }
+function buildplot(sample){
+    d3.json("static/samples.json").then((importedData)=>{
+    // d3.json("static/samples.json").then(function(data) {
+    
+        console.log(importedData);
+        
+        var data=importedData;
+        
+    // -------------------------------------------------------------------------------------
+    // Grab values from the data json object to build the plots
+    var name = data.names;
+    console.log(name);
+     var samples = data.samples;
+     console.log(samples);
+    //  for (var i = 0; i < name.length; i++) {
+    //    console.log(name[i]);
+        //  console.log("-----------------------------------");
+        var resultArray = samples.filter(sampleObj => sampleObj.id == sample );
+        console.log(resultArray);
+        var result = resultArray[0];
+     
+       console.log(result);
+       var sample_values = result.sample_values;
+       console.log(sample_values);
+       // Use `otu_labels` as the hovertext for the chart.
+     var otu_labels = result.otu_labels;
+     console.log(otu_labels);
+     var otu_ids = result.otu_ids;
+     console.log(otu_ids);
+     // Use `otu_ids` as the labels for the bar chart
+     var yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse()
+     console.log(yticks);
+     var samplesSort = sample_values.slice(0,10).reverse();
+     console.log(samplesSort);
+    
+    //  pie chart labels
+    var labels = otu_ids.slice(0, 10).map(otuID => `${otuID}`).reverse()
+    //  -----------------part 3 Demographic info for this code data is displaying as array----------------------------------------------
+      var metaData =data.metadata;
+      var metaData1 =metaData.filter(metadObj => metadObj.id == sample );
+      // var metaData= data.metadata[0];
+      console.log(metaData1[0]);
+      d3.select("#sample-metadata").html(" ");
+      Object.entries(metaData1[0]).forEach(([key, value]) => {
+        
+        d3.select("#sample-metadata")
+                .append("h6")
+          .text(`${key}: ${value}`);
+    
+      
+      });
+    
+    
+    // ---------------------------------Barchart-----------------------------------------------------------
+    
+    var trace1 = {
+      type: "bar",
+        
+        x:samplesSort ,
+          y:yticks,
+        text:otu_labels,
+         orientation: "h"
+     }
+    
+    
+    var data = [trace1];
+    var layout = {
+      title: "'Bar' Chart",
+      margin: {
+        l: 100,
+        r: 100,
+        t: 100,
+        b: 100
+      }
+    };
+    
+    Plotly.newPlot("bar",data,layout);  
+    
+    
+       
+    // ---------------------------- Bubble chart--------------------------------------------
+    
+    // * Use `otu_ids` for the x values.
+    
+    // * Use `sample_values` for the y values.
+    
+    // * Use `sample_values` for the marker size.
+    
+    // * Use `otu_ids` for the marker colors.
+    
+    // * Use `otu_labels` for the text values.
+    
+    var trace2 = {
+      x: otu_ids,
+      y:samplesSort,
+      // y:sample_values,
+      mode: 'markers',
+      text: otu_labels,
+        marker: {
+        color:otu_ids,
+        colorscale:"Earth",
+        opacity: [1,0.8, 0.6, 0.4, 0.2],
+    //  size:sample_values
+     size:samplesSort
+      }
+    };
+    
+    var data = [trace2];
+    
+    var layout = {
+      title: "Bacteria Cultures Per Sample",
+          // margin: { t: 0 },
+          hovermode: "closest",
+          xaxis: { title: "OTU ID" },
+          margin: { t: 30}
+            //  margin: { t: 30} if this is in the chart is showing the tiltle
+        };
+    
+    
+    Plotly.newPlot('bubble', data, layout)
+    // ---------------------------------------pie chart--------------------------------------------------------------
+    var trace3 = {
+      labels: labels,
+        values:otu_ids,
+      type: "pie"
+    };
+    var data =[trace3]
+     var layout ={
+    
+      title:"pie chart"
+     }
+     Plotly.newPlot("pie",data,layout);
+      
+     
+    // -------------------------------Demographic info-----------------------------------------------
+    
+    
+    
+    
+    
     });
-  }
-
-d3.json("static/samples.json").then((importedData)=>{
-// d3.json("static/samples.json").then(function(data) {
-
-    console.log(importedData);
+    }
+    function init(){
     
-    var data=importedData
-    console.log(data.names);
-    //  getting otu_ids as array list
+      buildplot(940);
+     var testId = d3.select("#selDataset");
+     d3.json("static/samples.json").then((importedData)=>{
+      // d3.json("static/samples.json").then(function(data) {
       
-      var sample_values = data.samples[0].sample_values;
-      console.log(sample_values);
-      
-      var otu_ids =data.samples[0].otu_ids;
-      console.log(otu_ids);
-      
-      var otu_labels = data.samples[0].otu_labels;
-      console.log(otu_labels);
-
-      // Sort the data by otu_ids
-var sortedOtuids =otu_ids.sort((a, b) => b.otu_ids- a.otu_ids);
-console.log(sortedOtuids);
-// ---------------------------------------------------------------------------------------
-var sortedsample_values =sample_values.sort((a, b) => b.sample_values- a.sample_values);
-console.log(sortedsample_values);
-slicedData1 = sortedsample_values.slice(0, 10);
-console.log(slicedData1);
-reversedDatasamplevalues = slicedData1.reverse();
-console.log(reversedDatasamplevalues);
-// -------------------------------------------------------------------------------------
-
-// Slice the first 10 objects for plotting
-slicedData = sortedOtuids.slice(0, 10);
-console.log(slicedData);
-console.log("-----------------------")
-// Reverse the array to accommodate Plotly's defaults
-reversedDataotuids = slicedData.reverse();
-console.log(reversedDataotuids);
- 
-
-// ----------------------------test----------------
-// console.log(reversedData.map(object => object.otu_ids));
-
-
-//  creating the bar chart
-// var trace1 = {
-//   type: "bar",
+          console.log(importedData);
+    var data = importedData;
+    var names = data.names;
+    console.log(names);
+    names.forEach(name=>{
+      testId.append("option").property("value",name).text(name);
     
-//     x: sample_values,
-//   //   y: otu_ids,
-//      y:reversedData,
-//     //  text:otu_ids,
-//      orientation: "h"
-//  }
-// values given in hardcoded way-------------------------------
-x_otuids= [1977, 2318, 189, 352, 1189, 41, 2264, 482, 2859, 1167]
-y_samplevalues=[40, 40, 47, 50, 51, 71, 78, 113, 126, 163]
-
-
-var trace1 = {
-  type: "bar",
+    })
     
-    x:y_samplevalues,
-  //   y: otu_ids,
-    y:x_otuids ,
+     }); 
+                  
+    }
+    init();
     
-    text:otu_labels,
-     orientation: "h"
- }
-
-
-
-//  ----------------------------------test---------------------------------
-
-var trace1 = {
-  type: "bar",
+    function optionChanged(sample){
     
-    x:reversedDatasamplevalues ,
-  //   y: otu_ids,
-    y:reversedDataotuids,
-    text:otu_labels,
-     orientation: "h"
- }
-
-
-
-// var trace1 = {
-//   x: reversedData.map(object => object.sample_values),
-//   y: reversedData.map(object => object.otu_ids),
-//    text: reversedData.map(object => object.otu_ids),
-//   name: "otu_ids",
-//   type: "bar",
-//   orientation: "h"
-// };
-var data = [trace1];
-var layout = {
-  title: "'Bar' Chart",
-  margin: {
-    l: 100,
-    r: 100,
-    t: 100,
-    b: 100
-  }
-};
-
-Plotly.newPlot("bar",data,layout);  
-});
-   
+    buildplot(sample);
+    
+    
+    }
