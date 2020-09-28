@@ -1,14 +1,10 @@
-// / new file for the homework with out event handler the graph are working:
+
 // Use the D3 library to read in `samples
 // Use D3 fetch to read the JSON file
 // The data from the JSON file is arbitrarily named importedData as the argument
 
 
-// function unpack(rows, index) {
-//     return rows.map(function(row) {
-//       return row[index];
-//     });
-//   }
+// created build plot function and wrote the logic
 function buildplot(sample){
     d3.json("static/samples.json").then((importedData)=>{
     // d3.json("static/samples.json").then(function(data) {
@@ -46,7 +42,7 @@ function buildplot(sample){
     
     //  pie chart labels
     var labels = otu_ids.slice(0, 10).map(otuID => `${otuID}`).reverse()
-    //  -----------------part 3 Demographic info for this code data is displaying as array----------------------------------------------
+    //  -----------------part 3 Demographic info ----------------------------------------------
       var metaData =data.metadata;
       var metaData1 =metaData.filter(metadObj => metadObj.id == sample );
       // var metaData= data.metadata[0];
@@ -91,16 +87,7 @@ function buildplot(sample){
        
     // ---------------------------- Bubble chart--------------------------------------------
     
-    // * Use `otu_ids` for the x values.
-    
-    // * Use `sample_values` for the y values.
-    
-    // * Use `sample_values` for the marker size.
-    
-    // * Use `otu_ids` for the marker colors.
-    
-    // * Use `otu_labels` for the text values.
-    
+       
     var trace2 = {
       x: otu_ids,
       y:samplesSort,
@@ -120,11 +107,10 @@ function buildplot(sample){
     
     var layout = {
       title: "Bacteria Cultures Per Sample",
-          // margin: { t: 0 },
           hovermode: "closest",
           xaxis: { title: "OTU ID" },
           margin: { t: 30}
-            //  margin: { t: 30} if this is in the chart is showing the tiltle
+            
         };
     
     
@@ -146,19 +132,15 @@ function buildplot(sample){
     // -------------------------------Demographic info-----------------------------------------------
     
     
-    
-    
-    
     });
     }
+    // Created init function and appened the test subject ids into the dropdown
     function init(){
     
       buildplot(940);
      var testId = d3.select("#selDataset");
      d3.json("static/samples.json").then((importedData)=>{
-      // d3.json("static/samples.json").then(function(data) {
-      
-          console.log(importedData);
+      console.log(importedData);
     var data = importedData;
     var names = data.names;
     console.log(names);
@@ -171,7 +153,7 @@ function buildplot(sample){
                   
     }
     init();
-    
+    // created the optionChanged function whenever user changes the option
     function optionChanged(sample){
     
     buildplot(sample);
