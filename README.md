@@ -1,7 +1,13 @@
 # Plotly_Challenge
 
-* Using D3 read the jsonfile.
-* used d3 to draw the plots
-* Created the build plot function grab all the values from the  json and created the logics for demographics ,pie chart ansd barchart,bubble chart code .
-* Called buildplot in the init function to display the default page with testid-940,and also appended the test subjectid values in the dropdown.
-*  whenever user selects the data from the dropdown it optionchanged function  triggers and calls the builplot function and displayed the data on the webpage..
+*In this challenge, I took data stored in json format and used the D3 library to read it in JavaScript. Using a flask app, I built an interactive dashboard to explore the data, allowing a user to choose a subject ID number from a dropdown menu. 
+
+* Users can select a sample number from the drop down menu to select the participant in the study and view the dashboard changing with respect to the participant's measurements.
+
+The following plots are included in the dashboard using the app.js framwork:
+
+* A pie chart to view the proportion of the top 10 samples and their OTU ID and bacteria info on hover
+* A bubble chart to see OTU_IDs vs. the sample value with the size of the bubble determined by the sample value
+* A Bar chart with the top 10 OTU ids.
+
+
