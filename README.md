@@ -1,6 +1,6 @@
 # Plotly_Challenge
 
-*In this challenge, I took data stored in json format and used the D3 library to read it in JavaScript. Using a flask app, I built an interactive dashboard to explore the data, allowing a user to choose a subject ID number from a dropdown menu. 
+* In this challenge, I took data stored in json format and used the D3 library to read it in JavaScript. Using a flask app, I built an interactive dashboard to explore the data, allowing a user to choose a subject ID number from a dropdown menu. 
 
 * Users can select a sample number from the drop down menu to select the participant in the study and view the dashboard changing with respect to the participant's measurements.
 
